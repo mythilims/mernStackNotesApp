@@ -1,0 +1,12 @@
+Server 
+
+1.npm install express
+2.npm install cors
+3.npm install dotnet
+4.npm install mongoose
+
+mongodb => path: 'mongodb+srv://username:password@cluster0.tj4x16b.mongodb.net/myDatabase?retryWrites=true&w=majority'
+
+
+client
+

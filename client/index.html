@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Vite + React</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script>
+    // var value = 10
+
+    // function outer() {
+    //   console.log('1', value);   //  undefine
+    //   var value = 20;
+    //   function inner() {
+    //     console.log('2', value);   // referenece error
+    //     let value = 30;
+    //     console.log('3', value);  //30
+    //   }
+    //   try {
+    //     inner()
+    //   } catch (e) {
+    //     console.log(e.message,'m');   //referenece error
+
+    //   }
+    //   console.log('4', value);     //20  
+
+
+    // }
+    // outer()
+    // console.log('6', value);   //   10
+
+
+//     var x = 1;
+
+// function test() {
+//   console.log("1:", x); // ?
+  
+//   {
+//     console.log("2:", x); // ?
+//     let x = 2;
+//     console.log("3:", x); // ?
+//   }
+
+//   console.log("4:", x); // ?
+// }
+
+// test();
+
+// console.log("5:", x); // ?
+
+// function area (shape,a,b=null) {
+//   switch(shape){
+//     case "circle" : {
+//       return Math.PI * a * a
+//     }
+//     case  'square' :{
+//       return a*a
+//     }
+//     case 'rectangle' :{
+//       return a*b
+//     }
+//   }
+// }
+// console.log(area('circle',2));
+// console.log(area('square',2));
+// console.log(area('rectangle',2,4));
+
+// function outer  () {  // lexical env
+//   let value =0;  // lexcial scope
+//   return function (){   //closure
+//     value ++;
+//     console.log(value);    // closure
+    
+//   }
+// }
+
+// let counter =outer()
+// counter()
+// counter()
+
+
+  </script>
+</body>
+
+</html>

@@ -2,9 +2,10 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../features/authSlice";
-import Modal from "./modal";
-import { useState } from "react";
-import NewNote from "../pages/NewNote";
+import { lazy, useState } from "react";
+import { userDetails } from "../utils/common";
+const Modal = lazy(() => import("./modal"));
+const NewNote = lazy(() => import("../pages/NewNote"));
 
 export default function Sidebar() {
   let dispatch = useDispatch();
@@ -24,30 +25,38 @@ export default function Sidebar() {
   return (
     <>
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <NewNote edit={false} />
+        <NewNote editId={""} onClose={() => setShowModal(false)} />
       </Modal>
+
       <aside className=" text-sm md:text-base w-64 bg-[#4DA8DA] font-bold text-white p-4 z-20 relative">
-        <h2 className="text-xl mb-4">📝 Notes Hub</h2>
-        <nav className="flex flex-col gap-2">
+        <div className="text-sm mb-2 p-2">
+          <p>User Name :{userDetails().username.toUpperCase()} </p>
+          <p>Email :{userDetails().email} </p>
+        </div>
+        <hr className="border-b border-2 border-white border-solid "></hr>
+        <h2 className="text-xl my-3">
+          <i className="fa fa-list	"></i> Notes Hub
+        </h2>
+
+        <nav className="flex flex-col gap-2 m-1">
           <Link to="/dashboard" className="hover:underline">
-            Dashboard
+            <i className="fa  fa-tachometer mr-2"></i> Dashboard
           </Link>
           <Link to="/notes" className="hover:underline">
-            All Notes
+            <i className="fa fa-sticky-note mr-2"></i> All Notes
           </Link>
           <button
             className="cursor-pointer	 text-left hover:underline"
             onClick={addNewNote}
           >
-            New Note +
+            <i className="fa fa-plus mr-2"></i> New Note
           </button>
 
-          {/* <Link to="/addNote" className="hover:underline">New Note +</Link> */}
           <button
             className=" cursor-pointer	 text-left hover:underline"
             onClick={handleLogout}
           >
-            Logout
+            <i className="fa fa-sign-out mr-2"></i> Logout
           </button>
         </nav>
       </aside>

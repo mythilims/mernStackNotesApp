@@ -24,6 +24,24 @@ export const authCheck =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
      
   }
 })
+export const register =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
+  try{
+
+       const user = await fetch('http://localhost:3000/users/register',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(reqData)
+       })
+       const result = await user.json();
+       return result; 
+  }catch(e){
+     console.log(e);
+     return thunkApi.rejectWithValue(e)
+     
+  }
+})
 const authSlice =createSlice({
     name:'auth',
     initialState,

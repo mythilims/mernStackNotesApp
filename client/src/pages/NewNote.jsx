@@ -1,37 +1,77 @@
-import { useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createNote } from "../features/noteSlice";
+import { createNote, getByNote, updateNote } from "../features/noteSlice";
+import toast from "react-hot-toast";
+function NewNote({ onClose, editId }) {
 
-function NewNote({ onClose ,edit  }) {
-  console.log(onClose);
-  
   const [notesDetails, setNotesDetails] = useState({
     title: "",
     category: "",
     description: "",
+    id: "",
   });
-   const dispatch =useDispatch()
+  const dispatch = useDispatch();
   const handleChange = (value, field) => {
     setNotesDetails((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // ✅ prevent page reload
     console.log("Note Submitted:", notesDetails); // ✅ log or dispatch
 
-    if(notesDetails.title){
-      const data= await dispatch(createNote(notesDetails)).unwrap();
-
+    if (
+      notesDetails.title &&
+      notesDetails.description &&
+      notesDetails.category
+    ) {
+      if (editId) {
+        const data = await dispatch(updateNote(notesDetails)).unwrap();
+        if (data) {
+          toast.success("Note updated successfully ");
+          if (onClose) onClose(false);
+        } else {
+          if (onClose) onClose(false);
+        }
+      } else {
+        const data = await dispatch(createNote(notesDetails)).unwrap();
+        if (data) {
+          toast.success("Note add successfully ");
+          if (onClose) onClose(false);
+        } else {
+          if (onClose) onClose(false);
+        }
+      }
+    } else {
+      toast.error("fill the all field");
     }
-    // setNotesDetails({ title: "", category: "", description: "" });
-
-    // ✅ Close modal if onClose is provided
-    if (onClose) onClose(false);
   };
+
+  useEffect(() => {
+    if(editId){
+    async function getNoteById() {
+      try {
+        let res = await dispatch(getByNote(editId)).unwrap();
+        let data = res.data;
+        setNotesDetails((pre) => ({
+          ...pre,
+          title: data.title,
+          description: data.description,
+          category: data.category,
+          id: data._id,
+        }));
+      } catch (e) {
+        toast.error(e.message);
+      }
+    }
+    getNoteById();
+  }
+  }, [editId]);
 
   return (
     <>
-      <p className="text-2xl font-bold underline mb-6">{edit ? 'Edit' :'Add' } New Note</p>
+      <p className="text-2xl font-bold underline mb-6">
+        {editId ? "Edit" : "Add"} New Note
+      </p>
 
       <form
         className="flex flex-col gap-4 w-full max-w-md bg-white  p-2 rounded"
@@ -77,11 +117,11 @@ function NewNote({ onClose ,edit  }) {
           type="submit"
           className="mt-4 bg-[#4DA8DA] font-bold text-white py-2 rounded hover:bg-[#4DA8DA] transition"
         >
-          {edit ? 'Update' :'Save' } Note
+          {editId ? "Update" : "Save"} Note
         </button>
       </form>
     </>
   );
 }
 
-export default NewNote;
+export default React.memo(NewNote);

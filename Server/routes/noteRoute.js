@@ -1,27 +1,34 @@
 import isValidId from "../middlewares/collectionIdCheck.js";
 import Note from "../models/notesModal.js";
-
+import mongoose from "mongoose";
 import express from "express";
 const noteRoute = express.Router();
 
 noteRoute.get("/", async (req, res) => {
   console.log(req.query);
-  
-  const notes = await Note.find({userId:req.query.userId}).populate("userId","username email");
+
+  const notes = await Note.find({ userId: req.query.userId }).populate(
+    "userId",
+    "username email"
+  );
   try {
-    res.status(200).json({ data: notes, message: "success", error: "" ,success:true});
+    res
+      .status(200)
+      .json({ data: notes, message: "success", error: "", success: true });
   } catch (e) {
-    res.status(500).json({ data: [], message: "", error: "fail",success:false });
+    res
+      .status(500)
+      .json({ data: [], message: "", error: "fail", success: false });
   }
 });
 
 noteRoute.post("/", async (req, res) => {
-  const { title, description, category,userId } = req.body;
+  const { title, description, category, userId } = req.body;
   const note = new Note({
     title,
     description,
     category,
-    userId
+    userId,
   });
   try {
     await note.save();
@@ -31,12 +38,38 @@ noteRoute.post("/", async (req, res) => {
       message: "note not added",
       success: false,
       error: "server error",
-      success:false
+      success: false,
     });
   }
 });
 
-noteRoute.put("/:id", isValidId,async (req, res) => {
+noteRoute.get("/days", async (req, res) => {
+  try {
+    const user = req.query.userId;
+    const objectId = new mongoose.Types.ObjectId(user);
+    const notes = await Note.aggregate([
+      {
+        $match: { userId: objectId }, 
+      },
+      {
+        $group: {
+          _id: "$category", 
+          description:{$first:'$description'},
+          category:{$first:'$category'},
+          count: { $sum: 1 }, 
+        },
+      }
+    ]);
+
+    return res.status(200).json({ success: true, data: notes });
+  } catch (e) {
+    console.error("Error:", e.message);
+    return res.status(500).json({ success: false, data: [], error: e.message });
+  }
+});
+
+noteRoute.put("/:id", isValidId, async (req, res) => {
+
   const { body, params } = req;
   const updateNotes = await Note.findOneAndUpdate(
     { _id: params.id },
@@ -44,13 +77,17 @@ noteRoute.put("/:id", isValidId,async (req, res) => {
     { new: true }
   );
   try {
-    res.status(200).json({ message: "note updated", data: updateNotes,success:true });
+    res
+      .status(200)
+      .json({ message: "note updated", data: updateNotes, success: true });
   } catch (e) {
-    res.status(500).json({ message: "", error: e ,success:false});
+    res.status(500).json({ message: "", error: e, success: false });
   }
 });
 
-noteRoute.get("/:id", isValidId,async (req, res) => {
+noteRoute.get("/:id", isValidId, async (req, res) => {
+  console.log("3");
+
   try {
     const notes = await Note.findById(req.params.id);
     res.status(200).json({ data: notes, message: "success", error: "" });
@@ -59,12 +96,14 @@ noteRoute.get("/:id", isValidId,async (req, res) => {
   }
 });
 
-noteRoute.delete("/:id", isValidId,async (req, res) => {
+noteRoute.delete("/:id", isValidId, async (req, res) => {
+  console.log("4");
+
   try {
-      await Note.findOneAndDelete({ _id: req.params.id });
-    res.status(200).json({ message: "note deleted",success:true });
+    await Note.findOneAndDelete({ _id: req.params.id });
+    res.status(200).json({ message: "note deleted", success: true });
   } catch (e) {
-    res.status(500).json({ message: " deleted fail" ,success:true});
+    res.status(500).json({ message: " deleted fail", success: true });
   }
 });
 

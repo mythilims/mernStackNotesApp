@@ -1,25 +1,38 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signin from "../pages/Signin";
-import Dashboard from "../pages/DashBoard";
-import ProtectedRoute from "../features/ProtectedRoute";
-import Layout from "../layout/Layout";
-import NotesList from "../pages/NotesList";
-import NewNote from "../pages/NewNote";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import Register from "../pages/register";
+const Signin = lazy(() => import("../pages/Signin"));
+const Dashboard = lazy(() => import("../pages/DashBoard"));
+const ProtectedRoute = lazy(() => import("../features/ProtectedRoute"));
+const Layout = lazy(() => import("../layout/Layout"));
+const NotesList = lazy(() => import("../pages/NotesList"));
+const NewNote = lazy(() => import("../pages/NewNote"));
 
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Signin />} />
+      <Suspense
+        fallback={
+          <div className="text-center p-6 text-[#4DA8DA] font-bold">
+            🔄 Loading Page...
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/login" element={<Signin />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Layout />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="notes" element={<NotesList />} />
-            <Route path="addNote" element={<NewNote />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Layout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="notes" element={<NotesList />} />
+              <Route path="addNote" element={<NewNote />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

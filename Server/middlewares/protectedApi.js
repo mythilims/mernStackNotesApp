@@ -1,9 +1,7 @@
 import jsonToken from "jsonwebtoken";
 const mySceretKey = process.env.JWT_SECRET_KEY;
 const protectedApi = (req, res, next) => {
-  console.log(req.headers);
   let headers = req.headers.authorization;
-  console.log(headers);
   if (headers!==undefined &&!headers && headers?.headers.startsWith("Bearer")) {
     return res.status(401).json({ message: "token missing" });
   }

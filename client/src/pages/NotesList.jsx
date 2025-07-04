@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState,useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNote, getNotes } from "../features/noteSlice";
-import NewNote from "../pages/NewNote";
-import Modal from "../components/modal";
+const   NewNote =lazy(()=> import ( "../pages/NewNote"));
+const  Modal = lazy(()=> import ("../components/modal"));
+import toast from "react-hot-toast";
 
-export default function NotesList() {
+  function NotesList() {
   const [showModal, setShowModal] = useState(false);
   const [editId, setEdit] = useState("");
 
@@ -20,18 +21,26 @@ export default function NotesList() {
   const addNewNote = () => {
     setShowModal(true);
   };
-  const handleDelete = (e, id) => {
+  const handleDelete = useCallback(async (e, id) => {
     e.preventDefault();
-    dispatch(deleteNote(id));
-  };
-  const editDelete = (e, id) => {
+    try {
+      let data = await dispatch(deleteNote(id));
+      if (data) {
+        toast.success("Note deleted");
+      }
+    } catch (e) {
+      toast.error(e.message);
+    }
+  },[dispatch]);
+  const editDelete = useCallback((e, id) => {
     setEdit(id);
     setShowModal(true);
-  };
+  },[showModal]);
+
   return (
     <div className="p-3">
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <NewNote onClose={() => setShowModal(false)} editId={editId} />
+        <NewNote  onClose={() => setShowModal(false)} editId={editId} />
       </Modal>
       <div className="flex gap-6 my-2">
         <p className="text-2xl font-bold underline p-2 text-sm md:text-base">
@@ -51,6 +60,7 @@ export default function NotesList() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
         {data.length > 0 &&
+          !loading &&
           data.map((item) => (
             <div
               key={item._id}
@@ -85,6 +95,10 @@ export default function NotesList() {
             </div>
           ))}
       </div>
+      <div>{loading && <p>{error}</p>}</div>
     </div>
   );
 }
+
+
+export default React.memo(NotesList);

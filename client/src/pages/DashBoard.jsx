@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { getToken, userId } from "../utils/common";
+import { getToken, userId ,BASE_URL} from "../utils/common";
 
 function DashBoard() {
   const [series, setSeries] = useState([]);
@@ -8,7 +8,7 @@ function DashBoard() {
   useEffect(() => {
     async function getNoteDayWise() {
       const data = await fetch(
-        `http://localhost:3000/notes/days?userId=${userId()}`,
+        `${BASE_URL}/notes/days?userId=${userId()}`,
         {
           method: "GET",
           headers: {

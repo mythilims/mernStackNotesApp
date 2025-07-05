@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getToken, userId } from "../utils/common";
+import { getToken, userId,BASE_URL } from "../utils/common";
 console.log(userId(),getToken());
 
 export const getNotes = createAsyncThunk(
@@ -18,7 +18,7 @@ export const getNotes = createAsyncThunk(
     const queryString =new URLSearchParams(fiter).toString()
     try {
       const data = await fetch(
-        `http://localhost:3000/notes?${queryString}`,
+        `${BASE_URL}/notes?${queryString}`,
         {
           method: "GET",
           headers: {
@@ -45,7 +45,7 @@ export const createNote = createAsyncThunk(
     try {
       reqData.userId =userId();
       const data = await fetch(
-        `http://localhost:3000/notes`,
+        `${BASE_URL}/notes`,
         {
           method: "POST",
           headers: {
@@ -73,7 +73,7 @@ export const updateNote = createAsyncThunk(
   async (reqData, thunkApi) => {
     try {
       reqData.userId =userId();
-      const data = await fetch(`http://localhost:3000/notes/${reqData.id}`, {
+      const data = await fetch(`${BASE_URL}/notes/${reqData.id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -97,7 +97,7 @@ export const deleteNote = createAsyncThunk(
   "note/delete",
   async (reqData, thunkApi) => {
     try {
-      const data = await fetch(`http://localhost:3000/notes/${reqData}`, {
+      const data = await fetch(`${BASE_URL}/notes/${reqData}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -120,7 +120,7 @@ export const getByNote = createAsyncThunk(
   "note/delete",
   async (reqData, thunkApi) => {
     try {
-      const data = await fetch(`http://localhost:3000/notes/${reqData}`, {
+      const data = await fetch(`${BASE_URL}/notes/${reqData}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

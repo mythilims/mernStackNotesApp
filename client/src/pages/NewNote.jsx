@@ -103,10 +103,11 @@ function NewNote({ onClose, editId }) {
 
         <div className="flex flex-col">
           <label className="mb-1 font-semibold">Description</label>
-          <input
+          <textarea
             type="text"
             placeholder="Enter description"
             name="description"
+            row="2"
             onChange={(e) => handleChange(e.target.value, "description")}
             value={notesDetails.description}
             className="ring-1 hover:ring-blue-300 hover:ring-2 hover:outline-none p-2 rounded"

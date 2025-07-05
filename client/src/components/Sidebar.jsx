@@ -29,14 +29,16 @@ export default function Sidebar() {
       </Modal>
 
       <aside className=" text-sm md:text-base w-64 bg-[#4DA8DA] font-bold text-white p-4 z-20 relative">
-        <div className="text-sm mb-2 p-2">
-          <p>User Name :{userDetails().username.toUpperCase()} </p>
-          <p>Email :{userDetails().email} </p>
+        <div className="text-sm  ">
+          <h2 className="text-xl ">
+            <i className="fa fa-list	"></i> Notes Hub
+          </h2>
+          <div className="p-2">
+            <p>User Name :{userDetails().username.toUpperCase()} </p>
+            <p>Email :{userDetails().email} </p>
+          </div>
         </div>
         <hr className="border-b border-2 border-white border-solid "></hr>
-        <h2 className="text-xl my-3">
-          <i className="fa fa-list	"></i> Notes Hub
-        </h2>
 
         <nav className="flex flex-col gap-2 m-1">
           <Link to="/dashboard" className="hover:underline">

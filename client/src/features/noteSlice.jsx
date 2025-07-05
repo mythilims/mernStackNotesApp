@@ -5,9 +5,20 @@ console.log(userId(),getToken());
 export const getNotes = createAsyncThunk(
   "note/fetch",
   async (reqData, thunkApi) => {
+    let fiter ={
+      userId:userId(),
+      title:reqData?reqData:''
+    }
+    Object.entries(fiter).map(([key,value])=>{
+     if(value ===''){
+      delete fiter[key]
+     }
+     
+    })
+    const queryString =new URLSearchParams(fiter).toString()
     try {
       const data = await fetch(
-        `http://localhost:3000/notes?userId=${userId()}`,
+        `http://localhost:3000/notes?${queryString}`,
         {
           method: "GET",
           headers: {

@@ -6,8 +6,12 @@ const noteRoute = express.Router();
 
 noteRoute.get("/", async (req, res) => {
   console.log(req.query);
-
-  const notes = await Note.find({ userId: req.query.userId }).populate(
+  const {userId,title} =req.query;
+  let filter ={
+    ...(userId && {userId}),
+    ...(title && {title:{$regex:title,$options:"i"}})
+  }
+  const notes = await Note.find(filter).populate(
     "userId",
     "username email"
   );

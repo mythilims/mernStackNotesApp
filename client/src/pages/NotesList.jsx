@@ -1,13 +1,14 @@
-import React, { lazy, useEffect, useState,useCallback } from "react";
+import React, { lazy, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNote, getNotes } from "../features/noteSlice";
-const   NewNote =lazy(()=> import ( "../pages/NewNote"));
-const  Modal = lazy(()=> import ("../components/modal"));
+const NewNote = lazy(() => import("../pages/NewNote"));
+const Modal = lazy(() => import("../components/modal"));
 import toast from "react-hot-toast";
 
-  function NotesList() {
+function NotesList() {
   const [showModal, setShowModal] = useState(false);
   const [editId, setEdit] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const dispatch = useDispatch();
 
@@ -21,31 +22,62 @@ import toast from "react-hot-toast";
   const addNewNote = () => {
     setShowModal(true);
   };
-  const handleDelete = useCallback(async (e, id) => {
-    e.preventDefault();
-    try {
-      let data = await dispatch(deleteNote(id));
-      if (data) {
-        toast.success("Note deleted");
+  const handleDelete = useCallback(
+    async (e, id) => {
+      e.preventDefault();
+      try {
+        let data = await dispatch(deleteNote(id));
+        if (data) {
+          toast.success("Note deleted");
+        }
+      } catch (e) {
+        toast.error(e.message);
       }
-    } catch (e) {
-      toast.error(e.message);
-    }
-  },[dispatch]);
-  const editDelete = useCallback((e, id) => {
-    setEdit(id);
-    setShowModal(true);
-  },[showModal]);
+    },
+    [dispatch]
+  );
+  const editDelete = useCallback(
+    (e, id) => {
+      setEdit(id);
+      setShowModal(true);
+    },
+    [showModal]
+  );
+  const debounce = (fun, deley) => {
+    let time;
+    return function (...args) {
+      clearTimeout(time);
+      time = setTimeout(() => {
+        fun.apply(this, args);
+      }, deley);
+    };
+  };
+  const handleSearch = debounce((value) => {
+    dispatch(getNotes(value));
+  }, 2000);
 
+  const handleSeachSet = useCallback((e) => {
+    setSearchValue(e.target.value);
+    handleSearch(e.target.value);
+  }, []);
   return (
     <div className="p-3">
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <NewNote  onClose={() => setShowModal(false)} editId={editId} />
+        <NewNote onClose={() => setShowModal(false)} editId={editId} />
       </Modal>
       <div className="flex gap-6 my-2">
         <p className="text-2xl font-bold underline p-2 text-sm md:text-base">
           Notes List
         </p>
+
+        <input
+          placeholder="Search notes title"
+          name="search"
+          value={searchValue}
+          className="ring-1  p-2 rounded hover:ring-2 hover:ring-blue-300 hover:outline-none"
+          onChange={handleSeachSet}
+        />
+
         <button
           className=" text-sm md:text-base  cursor-pointer	 text-left hover:underline rounded sm:rounded-sm bg-[#4DA8DA] p-2 font-bold"
           onClick={addNewNote}
@@ -67,7 +99,9 @@ import toast from "react-hot-toast";
               className="line-clamp-3 bg-white rounded p-4 shadow hover:shadow-md transition w-full max-w-full  h-80 sm:h-50 break-words whitespace-normal"
             >
               <div className="flex items-center justify-between mb-2">
-                <h1 className="font-bold text-lg underline">{item.title}</h1>
+                <h1 className="font-bold text-lg underline">
+                  Title:{item.title}
+                </h1>
                 <div className="flex flex-col sm:flex-row gap-2 sm:justify-start sm:items-start my-3">
                   <button
                     className="cursor-pointer	 text-left hover:underline rounded bg-[#4DA8DA] p-2 font-bold text-white"
@@ -99,6 +133,5 @@ import toast from "react-hot-toast";
     </div>
   );
 }
-
 
 export default React.memo(NotesList);

@@ -5,7 +5,6 @@ import express from "express";
 const noteRoute = express.Router();
 
 noteRoute.get("/", async (req, res) => {
-  console.log(req.query);
   const {userId,title} =req.query;
   let filter ={
     ...(userId && {userId}),
@@ -90,8 +89,6 @@ noteRoute.put("/:id", isValidId, async (req, res) => {
 });
 
 noteRoute.get("/:id", isValidId, async (req, res) => {
-  console.log("3");
-
   try {
     const notes = await Note.findById(req.params.id);
     res.status(200).json({ data: notes, message: "success", error: "" });
@@ -101,8 +98,6 @@ noteRoute.get("/:id", isValidId, async (req, res) => {
 });
 
 noteRoute.delete("/:id", isValidId, async (req, res) => {
-  console.log("4");
-
   try {
     await Note.findOneAndDelete({ _id: req.params.id });
     res.status(200).json({ message: "note deleted", success: true });

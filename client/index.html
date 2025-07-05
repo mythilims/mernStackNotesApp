@@ -3,185 +3,18 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png+xml" href="/notes.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="Notes App using MERN Stack" content="Notes App using MERN Stack" />
+  <meta name="theme-color" content="#2563eb" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Vite + React</title>
+  <title>Notes App</title>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <script>
-    let array =[1,2,4,5,6,7]
-    let out=array.map((x)=>x*2);
-    console.log(out,array);
-    let fout= array.filter(x =>x >3);
-    console.log(fout);
-    let aObject =[{name:'dev',age:19},{name:'mythili',age:29}]
-    let filterBew =aObject.map(x =>x.name);
-    console.log(filterBew);
 
-    let f =aObject.filter(x=>x.age>20).map(z=>z.name)
-
-        console.log(f);
-
-        let r =aObject.reduce((acc,curr) =>{
-             if(curr.age >20){
-              acc.push(curr.name)
-             }
-             return acc
-        },[])
-        console.log(r);
-       
-        let even =array.filter(x =>{return x % 2});
-        let odd = array.filter(x=>x %2 ===0);
-        console.log(even,odd);
-        
-
-        let af = array.reduce((a,c) =>{
-          if(c % 2){
-                a.even.push(c) ;
-          }else{
-  a.odd.push(c) ;
-               
-          }
-                          return  a
-
-        },{even:[],odd:[]})
-
-        let re ='mythili'.split('').reduce((a,c) =>{
-          a[c] =(a[c] || 0) +1
-          return a
-        },{})
-        console.log(re);
-
-
-let str = "Hello Mythili";
-let toReplace = "Mythili";
-let newText = "Anu";
-let s =str.split(toReplace).join(newText);
-console.log(s);
-
-        function longString (w){
-          let c =''
-          for(let x =0;x<w.length;x++){
-            if(c.includes(w[x])){
-              return c.length
-            }else{
-            c +=w[x]
-
-            }
-          }
-          return c.length
-        }
-        
-       console.log( longString('abcabcbb  '));
-       function lengthOfLongestSubstring(str) {
-    let longest = "";
-    for (let i = 0; i < str.length; i++) {
-        if (longest.includes(str[i])) {
-            return longest
-        } else {
-            longest += str[i];
-        }
-    }
-    return longest;
-}
-
-console.log(lengthOfLongestSubstring("abcabcbb"));
-
-
-
-function long (string) {
-  let longChar ='';
-  for(let i=0;i<string.length;i++){
-    if(longChar.includes(string[i])){
-      return longChar
-    }else{
-      longChar +=string[i]
-    }
-  }
-  return longChar
-}
-
-console.log(long("mythili"));
-
-    // var value = 10
-
-
-    // function outer() {
-    //   console.log('1', value);   //  undefine
-    //   var value = 20;
-    //   function inner() {
-    //     console.log('2', value);   // referenece error
-    //     let value = 30;
-    //     console.log('3', value);  //30
-    //   }
-    //   try {
-    //     inner()
-    //   } catch (e) {
-    //     console.log(e.message,'m');   //referenece error
-
-    //   }
-    //   console.log('4', value);     //20  
-
-
-    // }
-    // outer()
-    // console.log('6', value);   //   10
-
-
-//     var x = 1;
-
-// function test() {
-//   console.log("1:", x); // ?
-  
-//   {
-//     console.log("2:", x); // ?
-//     let x = 2;
-//     console.log("3:", x); // ?
-//   }
-
-//   console.log("4:", x); // ?
-// }
-
-// test();
-
-// console.log("5:", x); // ?
-
-// function area (shape,a,b=null) {
-//   switch(shape){
-//     case "circle" : {
-//       return Math.PI * a * a
-//     }
-//     case  'square' :{
-//       return a*a
-//     }
-//     case 'rectangle' :{
-//       return a*b
-//     }
-//   }
-// }
-// console.log(area('circle',2));
-// console.log(area('square',2));
-// console.log(area('rectangle',2,4));
-
-// function outer  () {  // lexical env
-//   let value =0;  // lexcial scope
-//   return function (){   //closure
-//     value ++;
-//     console.log(value);    // closure
-    
-//   }
-// }
-
-// let counter =outer()
-// counter()
-// counter()
-
-
-  </script>
 </body>
 
 </html>

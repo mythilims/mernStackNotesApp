@@ -34,7 +34,6 @@ export const userRegesiter =async (req, res, next) => {
     if(!isMatch){
       return  res.status(400).json({error:'invalid credential',success:false})
     }
-    console.log();
     
     try{
      const token =await user.generateToken();

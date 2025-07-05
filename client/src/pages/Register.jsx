@@ -17,12 +17,10 @@ function Register() {
   );
   const dispatch = useDispatch();
   const authDetails = useSelector((state) => state.auth);
-  console.log(authDetails);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await dispatch(register(userDetails)).unwrap();
-    console.log(result);
     if (result.success) {
     //   localStorage.setItem("userDetails", JSON.stringify(result.userDetails));
     //   localStorage.setItem("token", result.token);

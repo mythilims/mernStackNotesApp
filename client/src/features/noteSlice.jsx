@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getToken, userId,BASE_URL } from "../utils/common";
-console.log(userId(),getToken());
 
 export const getNotes = createAsyncThunk(
   "note/fetch",
@@ -27,7 +26,6 @@ export const getNotes = createAsyncThunk(
           },
         }
       );
-      console.log(data);
       if (!data.ok) {
         throw new Error("fail");
       }
@@ -55,7 +53,6 @@ export const createNote = createAsyncThunk(
           body: JSON.stringify(reqData),
         }
       );
-      console.log(data);
       if (!data.ok) {
         throw new Error("fail");
       }
@@ -81,7 +78,6 @@ export const updateNote = createAsyncThunk(
         },
         body: JSON.stringify(reqData),
       });
-      console.log(data);
       if (!data.ok) {
         throw new Error("fail");
       }
@@ -104,7 +100,6 @@ export const deleteNote = createAsyncThunk(
           authorization: `Bearer ${getToken()}`,
         },
       });
-      console.log(data);
       if (!data.ok) {
         throw new Error("fail");
       }
@@ -127,7 +122,6 @@ export const getByNote = createAsyncThunk(
           'authorization': `Bearer ${getToken()}`,
         },
       });
-      console.log(data);
       if (!data.ok) {
         throw new Error("fail");
       }

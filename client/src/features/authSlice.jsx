@@ -20,7 +20,6 @@ export const authCheck =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
        const result = await user.json();
        return result; 
   }catch(e){
-     console.log(e);
      return thunkApi.rejectWithValue(e)
      
   }
@@ -38,7 +37,6 @@ export const register =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
        const result = await user.json();
        return result; 
   }catch(e){
-     console.log(e);
      return thunkApi.rejectWithValue(e)
      
   }

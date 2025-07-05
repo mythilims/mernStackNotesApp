@@ -17,7 +17,6 @@ function NewNote({ onClose, editId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // ✅ prevent page reload
-    console.log("Note Submitted:", notesDetails); // ✅ log or dispatch
 
     if (
       notesDetails.title &&

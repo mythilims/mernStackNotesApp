@@ -10,6 +10,7 @@ app.use(express.json());
 dbConnect();
 app.use("/users", userRoute);
 //protetedApi 
+
 app.use('/notes',protectedApi,noteRoute)
 
 const PORT = process.env.PORT;

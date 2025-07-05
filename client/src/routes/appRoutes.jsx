@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Register from "../pages/register";
+import Register from "../pages/Register";
 const Signin = lazy(() => import("../pages/Signin"));
 const Dashboard = lazy(() => import("../pages/DashBoard"));
 const ProtectedRoute = lazy(() => import("../features/ProtectedRoute"));

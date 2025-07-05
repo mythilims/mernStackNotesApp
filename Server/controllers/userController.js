@@ -37,6 +37,8 @@ export const userRegesiter =async (req, res, next) => {
     
     try{
      const token =await user.generateToken();
+     console.log(token,'token');
+     
     res.status(200).json({message:'Login scucessful',success:true,error:'',token,userDetails:{username:user.username,email:user.email,id:user._id}})
     }catch(e){
         res.status(500).json({message:'',success:false,error:'server error'})

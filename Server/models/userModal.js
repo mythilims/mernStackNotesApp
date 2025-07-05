@@ -37,6 +37,8 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 userSchema.methods.generateToken = async function () {
+  console.log(secretKey);
+  
   try {
     let token = jsToken.sign({ id: this._id, email: this.email }, secretKey, {
       expiresIn: "1d",

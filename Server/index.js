@@ -13,6 +13,7 @@ app.use("/users", userRoute);
 app.use('/notes',protectedApi,noteRoute)
 
 const PORT = process.env.PORT;
+
 app.listen(PORT, () => {
   console.log(`am a server and started PORT:${PORT}`);
 });

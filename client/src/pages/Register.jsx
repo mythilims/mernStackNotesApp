@@ -104,6 +104,7 @@ function Register() {
                 />
               </div>
 
+
               <button
                 type="submit"
                 className="rounded bg-[#578FCA] text-white py-2 px-4 w-full font-bold hover:bg-[#3674B5] transition"

@@ -12,6 +12,7 @@ export const authCheck =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
 
        const user = await fetch(`${BASE_URL}/users/login`,{
         method:'POST',
+        credentials :'include',
         headers:{
             'Content-Type':'application/json'
         },
@@ -29,6 +30,7 @@ export const register =createAsyncThunk('auth/user',async(reqData,thunkApi)=>{
 
        const user = await fetch(`${BASE_URL}/users/register`,{
         method:'POST',
+        credentials :'include',
         headers:{
             'Content-Type':'application/json'
         },

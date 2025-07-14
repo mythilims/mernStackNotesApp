@@ -20,6 +20,7 @@ export const getNotes = createAsyncThunk(
         `${BASE_URL}/notes?${queryString}`,
         {
           method: "GET",
+          credentials :'include',
           headers: {
             "content-type": "application/json",
             authorization: `Bearer ${getToken()}`,
@@ -46,6 +47,7 @@ export const createNote = createAsyncThunk(
         `${BASE_URL}/notes`,
         {
           method: "POST",
+           credentials :'include',
           headers: {
             "content-type": "application/json",
             authorization: `Bearer ${getToken()}`,
@@ -72,6 +74,8 @@ export const updateNote = createAsyncThunk(
       reqData.userId =userId();
       const data = await fetch(`${BASE_URL}/notes/${reqData.id}`, {
         method: "PUT",
+                credentials :'include',
+
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${getToken()}`,
@@ -95,6 +99,8 @@ export const deleteNote = createAsyncThunk(
     try {
       const data = await fetch(`${BASE_URL}/notes/${reqData}`, {
         method: "DELETE",
+                credentials :'include',
+
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${getToken()}`,
@@ -117,6 +123,8 @@ export const getByNote = createAsyncThunk(
     try {
       const data = await fetch(`${BASE_URL}/notes/${reqData}`, {
         method: "GET",
+                credentials :'include',
+
         headers: {
           "content-type": "application/json",
           'authorization': `Bearer ${getToken()}`,

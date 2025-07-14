@@ -21,6 +21,9 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(userDetails.email=== ""|| userDetails.password=== "" || userDetails.username=== '' ){
+      return toast.error("fill the all field")
+    }
     const result = await dispatch(register(userDetails)).unwrap();
     if (result.success) {
       toast.success(result.message);
@@ -28,7 +31,7 @@ function Register() {
         navigator("/login");
       }, 1000);
     } else {
-      toast.error(result.error);
+      
     }
   };
 

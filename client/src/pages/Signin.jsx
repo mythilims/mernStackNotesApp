@@ -21,6 +21,9 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(userDetails.email=== ""|| userDetails.password=== ""  ){
+      return toast.error("fill the all field")
+    }
     const result = await dispatch(authCheck(userDetails)).unwrap();
     if (result.success) {
       localStorage.setItem("userDetails", JSON.stringify(result.userDetails));

@@ -5,7 +5,10 @@ import userRoute from "./routes/UserRoute.js";
 import noteRoute from "./routes/noteRoute.js";
 import protectedApi from "./middlewares/protectedApi.js";
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin:"https://mernstacknotesapp.onrender.com",
+  credentials:true
+}))
 app.use(express.json());
 dbConnect();
 app.use("/users", userRoute);

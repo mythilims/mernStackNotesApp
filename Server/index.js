@@ -6,7 +6,7 @@ import noteRoute from "./routes/noteRoute.js";
 import protectedApi from "./middlewares/protectedApi.js";
 const app = express();
 app.use(cors({
-  origin:"https://mernstacknotesapp.onrender.com",
+  origin:"https://mernstacknotesapp-yjii.onrender.com",
   credentials:true
 }))
 app.use(express.json());

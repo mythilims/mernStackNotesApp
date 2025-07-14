@@ -5,16 +5,22 @@ import userRoute from "./routes/UserRoute.js";
 import noteRoute from "./routes/noteRoute.js";
 import protectedApi from "./middlewares/protectedApi.js";
 const app = express();
-app.use(cors({
-  origin:"https://mernstacknotesapp-yjii.onrender.com",
-  credentials:true
-}))
+app.use(
+  cors({
+    origin: [
+      "https://mernnotesappui.netlify.app",
+      "http://localhost:5173",
+    ],
+
+    credentials: true,
+  })
+);
 app.use(express.json());
 dbConnect();
 app.use("/users", userRoute);
-//protetedApi 
+//protetedApi
 
-app.use('/notes',protectedApi,noteRoute)
+app.use("/notes", protectedApi, noteRoute);
 
 const PORT = process.env.PORT;
 

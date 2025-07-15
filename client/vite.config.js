@@ -6,6 +6,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [react(),tailwindcss()],
     base:'/',
+    server: {
+    proxy: {
+      '/api': 'https://mernstacknotesapp.onrender.com'
+    }
+  },
   build: {
        outDir: 'dist',
        chunkSizeWarningLimit: 1000,

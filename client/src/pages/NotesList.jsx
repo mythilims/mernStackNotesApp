@@ -89,10 +89,12 @@ function NotesList() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl">
+                {/* bg-gradient-to-r from-purple-500 to-indigo-600 */}
+                <div className="p-2  bg-[#2A4759]  rounded-xl">
                   <StickyNote className="w-6 h-6 text-white" />
                 </div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                {/*  bg-gradient-to-r from-purple-600 to-indigo-600 */}
+                <h1 className="text-2xl font-bold bg-black bg-clip-text text-transparent">
                   Notes
                 </h1>
               </div>
@@ -105,13 +107,13 @@ function NotesList() {
                   placeholder="Search your notes..."
                   name="search"
                   value={searchValue}
-                  className="pl-10 pr-4 py-2 w-64 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-sm"
+                  className="pl-10 pr-4 py-2 w-64 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
                   onChange={handleSeachSet}
                 />
               </div>
-              
+              {/* bg-gradient-to-r from-purple-500 to-indigo-600 */}
               <button
-                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-medium rounded-full hover:from-purple-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="flex bg-[#2A4759] items-center space-x-2 px-4 py-2  text-white font-medium rounded-full hover:from-purple-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
                 onClick={addNewNote}
               >
                 <Plus className="w-4 h-4" />
@@ -152,7 +154,7 @@ function NotesList() {
             {data.map((item, index) => (
               <div
                 key={item._id}
-                className={`group relative ${colors[index % colors.length]} border-2 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-80 flex flex-col`}
+                className={` text-white group relative bg-[#456882]  border-2 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-80 flex flex-col`}
               >
                 {/* Action Buttons */}
                 <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -173,12 +175,12 @@ function NotesList() {
                 </div>
                 
                 {/* Note Content */}
-                <div className="pr-16 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3 leading-tight line-clamp-2">
+                <div className="text-whitepr-16 flex-1 flex flex-col">
+                  <h3 className="text-lg font-bold text-white mb-3 leading-tight line-clamp-2">
                     {item.title}
                   </h3>
                   <div className="flex-1 overflow-hidden">
-                    <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap line-clamp-6">
+                    <p className="text-white text-sm leading-relaxed whitespace-pre-wrap line-clamp-6">
                       {item.description}
                     </p>
                   </div>
@@ -186,7 +188,7 @@ function NotesList() {
                 
                 {/* Note Footer */}
                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-300/50">
-                  <div className="flex items-center space-x-1 text-xs text-gray-600">
+                  <div className="flex items-center space-x-1 text-xs text-white">
                     <Clock className="w-3 h-3" />
                     <span>{item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'Today'}</span>
                   </div>

@@ -73,7 +73,8 @@ function NewNote({ onClose, editId }) {
         <h2 className="text-xl font-bold text-gray-800 mb-1">
           {editId ? "Edit" : "Create"} Note
         </h2>
-        <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+        {/* bg-gradient-to-r from-blue-500 to-purple-600 */}
+        <div className="w-12 h-0.5  bg-[#2A4759] mx-auto rounded-full"></div>
       </div>
 
       <div
@@ -81,7 +82,6 @@ function NewNote({ onClose, editId }) {
       >
         <div className="flex flex-col space-y-1">
           <label className="text-xs font-semibold text-gray-700 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
             Title
           </label>
           <input
@@ -90,13 +90,12 @@ function NewNote({ onClose, editId }) {
             value={notesDetails.title}
             name="title"
             onChange={(e) => handleChange(e.target.value, "title")}
-            className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 text-sm"
+            className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 resize-none text-sm"
           />
         </div>
 
         <div className="flex flex-col space-y-1">
           <label className="text-xs font-semibold text-gray-700 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
             Category
           </label>
           <input
@@ -105,13 +104,12 @@ function NewNote({ onClose, editId }) {
             name="category"
             onChange={(e) => handleChange(e.target.value, "category")}
             value={notesDetails.category}
-            className="border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 text-sm"
+            className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 resize-none text-sm"
           />
         </div>
 
         <div className="flex flex-col space-y-1">
           <label className="text-xs font-semibold text-gray-700 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
             Description
           </label>
           <textarea
@@ -121,14 +119,14 @@ function NewNote({ onClose, editId }) {
             rows="3"
             onChange={(e) => handleChange(e.target.value, "description")}
             value={notesDetails.description}
-            className="border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 resize-none text-sm"
+            className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none p-2 rounded transition-all duration-300 bg-white/80 backdrop-blur-sm placeholder-gray-400 resize-none text-sm"
           />
         </div>
-
+{/*  bg-gradient-to-r from-blue-600 to-purple-600 */}
         <button
           type="submit"
           onClick={handleSubmit}
-          className="mt-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 font-bold text-white py-2 px-4 rounded shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm"
+          className="mt-3 bg-[#2A4759] hover:from-blue-700 hover:to-purple-700 font-bold text-white py-2 px-4 rounded shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm"
         >
           {editId ? "Update" : "Save"} Note
         </button>

@@ -39,15 +39,17 @@ export default function Sidebar() {
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
         <NewNote editId={""} onClose={() => setShowModal(false)} />
       </Modal>
-
-      <aside className="w-72 bg-gradient-to-b from-slate-900 to-slate-800 text-white shadow-2xl border-r border-slate-700 flex flex-col min-h-full">
+{/* bg-gradient-to-b from-slate-900 to-slate-800 */}
+      <aside className="w-72 bg-[#456882]   text-white shadow-2xl border-r border-slate-700 flex flex-col min-h-full">
         {/* Header */}
         <div className="p-6 border-b border-slate-700">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+            {/*  bg-gradient-to-r from-blue-500 to-purple-600 */}
+            <div className="p-2 rounded-xl bg-[#2A4759]">
               <StickyNote className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            {/*  bg-gradient-to-r from-blue-400 to-purple-400 */}
+            <h2 className="text-xl font-bold bg-white bg-clip-text text-transparent">
               Notes Hub
             </h2>
           </div>
@@ -55,7 +57,8 @@ export default function Sidebar() {
           {/* User Profile */}
           <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
             <div className="flex items-center space-x-3 mb-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            {/* bg-gradient-to-r from-blue-500 to-purple-600 */}
+              <div className="w-10 h-10 bg-[#2A4759]  rounded-full flex items-center justify-center">
                 <User className="w-5 h-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">

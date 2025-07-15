@@ -119,11 +119,12 @@ function DashBoard() {
         {/* Header Section */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-2">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+            {/* bg-gradient-to-r from-blue-500 to-purple-600 */}
+            <div className="p-3  bg-[#2A4759]  rounded-xl">
               <BarChart3 className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl  font-bold bg-black bg-clip-text text-transparent">
                 Analytics Dashboard
               </h1>
               <p className="text-slate-600 mt-1">Track your note-taking patterns and productivity</p>

@@ -5,13 +5,20 @@ import userRoute from "./routes/UserRoute.js";
 import noteRoute from "./routes/noteRoute.js";
 import protectedApi from "./middlewares/protectedApi.js";
 const app = express();
+const allowedOrigins = [
+  "https://mernnotesappui.netlify.app",
+  "http://localhost:5173"
+];
 app.use(
   cors({
-    origin: [
-      "https://mernnotesappui.netlify.app",
-      "http://localhost:5173",
-    ],
-
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like Postman or mobile apps)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
